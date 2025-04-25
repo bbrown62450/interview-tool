@@ -87,7 +87,7 @@ if st.session_state.setup_complete and not st.session_state.feedback_shown and n
     if "messages" not in st.session_state:
         st.session_state.messages = [{
             "role":"system", 
-            "content": f"You are a {st.session_state['tradition']} minister who thoughtfully and gently provides pastoral care to a person named {st.session_state['name']} who wants to discuss {st.session_state['issue']} Here is their spiritual biography: {st.session_state['short_spiritual_bio']} Please offer kind support and practical guidance. Please include guidance that aligns with their favorite authors: {st.session_state['favorite_authors']}. Please also emphasize unique teaching of the {st.session['tradition']} tradition"}]
+            "content": f"You are a {st.session_state['tradition']} minister who thoughtfully and gently provides pastoral care to a person named {st.session_state['name']} who wants to discuss {st.session_state['issue']} Here is their spiritual biography: {st.session_state['short_spiritual_bio']} Please offer kind support and practical guidance. Please include guidance that aligns with their favorite authors: {st.session_state['favorite_authors']}. Please also emphasize unique teaching of the {st.session_state['tradition']} tradition"}]
 
     for message in st.session_state.messages:
         if message["role"] != "system":
