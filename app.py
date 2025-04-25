@@ -2,8 +2,8 @@ from openai import OpenAI
 import streamlit as st
 from streamlit_js_eval import streamlit_js_eval
 
-st.set_page_config(page_title="Streamlit Chat", page_icon="💬")
-st.title("Chatbot")
+st.set_page_config(page_title="Revbot", page_icon="✟")
+st.title("Revbot")
 
 if "setup_complete" not in st.session_state:
     st.session_state.setup_complete = False
@@ -24,57 +24,57 @@ def show_feedback():
 
 if not st.session_state.setup_complete:
 
-    st.subheader("Personal information", divider='rainbow')
+    st.subheader("Introduction", divider='rainbow')
 
     if "name" not in st.session_state:
         st.session_state["name"] = ""
-    if "experience" not in st.session_state:
-        st.session_state["experience"] = ""
-    if "skills" not in st.session_state:
-        st.session_state["skills"] = ""
+    if "short_spiritual_bio" not in st.session_state:
+        st.session_state["short_spiritual_bio"] = ""
+    if "favorite_authors" not in st.session_state:
+        st.session_state["favorite_authors"] = ""
 
-    st.session_state["name"] = st.text_input(label = "Name", max_chars = 40, value = st.session_state["name"], placeholder = "Enter your name")
+    st.session_state["name"] = st.text_input(label = "Name", max_chars = 40, value = st.session_state["name"], placeholder = "Plase share your name (fake names are fine)")
 
-    st.session_state["experience"] = st.text_area(label = "Experience", height = None, max_chars = 200, value = st.session_state["experience"], placeholder = "Describe your experience")
+    st.session_state["short_spiritual_bio"] = st.text_area(label = "Short Spiritual Bio", height = None, max_chars = 200, value = st.session_state["short_spiritual_bio"], placeholder = "Please share a short spiritual biography.")
 
-    st.session_state["skills"] = st.text_area(label = "Skills", height = None, max_chars = 200, value = st.session_state["skills"], placeholder = "List your skills")
+    st.session_state["favorite_authors"] = st.text_area(label = "Favorite Authors", height = None, max_chars = 200, value = st.session_state["favorite_authors"], placeholder = "Who are some of your favorite authors?")
 
-    st.subheader("Company and Position", divider='rainbow')
+    st.subheader("Religious background", divider='rainbow')
     
-    if "level" not in st.session_state:
-        st.session_state["level"] = "Junior"
-    if "position" not in st.session_state:
-        st.session_state["position"] = "Data Scientist"
-    if "company" not in st.session_state:
-        st.session_state["company"] = "Amazon"
+    if "tradition" not in st.session_state:
+        st.session_state["tradition"] = "Protestant"
+    if "issue" not in st.session_state:
+        st.session_state["issue"] = "Mental Health Concerns"
+    # if "company" not in st.session_state:
+    #     st.session_state["company"] = "Amazon"
 
     col1, col2 = st.columns(2)
     with col1:
-        st.session_state["level"] = st.radio(
-            "Choose level",
+        st.session_state["tradition"] = st.radio(
+            "Choose tradition",
             key="visibility",
-            options=["Junior", "Mid-level", "Senior"],
+            options=["Protestant", "Catholic", "Orthodox"],
         )
 
     with col2:
-        st.session_state["position"] = st.selectbox(
-            "Choose a position",
-            ("Data Scientist", "Data engineer", "Bi Analyst", "Financial Analyst"))
+        st.session_state["issue"] = st.selectbox(
+            "Please choose an issue to discuss",
+            ("Aging", "Mental Health Concerns", "Doubts", "Discouragement", "Familly Matters", "Substance Abuse", "Theology", "Scripture", "Something else"))
         
-    st.session_state["company"] = st.selectbox(
-        "Choose a Company",
-        ("Amazon", "Meta", "Udemy", "365 Company", "Nestle", "LinkedIn", "Spotify"))
+    # st.session_state["company"] = st.selectbox(
+    #     "Choose a Company",
+    #     ("Amazon", "Meta", "Udemy", "365 Company", "Nestle", "LinkedIn", "Spotify"))
 
-    st.write(f"**Your information**: {st.session_state["level"]} {st.session_state["position"]} at {st.session_state["company"]}")
+    st.write(f"**You are part of the {st.session_state["tradition"]} tradition and would like to discuss {st.session_state["issue"]}")
 
-    if st.button("Start Interview", on_click=complete_setup):
-        st.write("Setup complete. Starting interview...")
+    if st.button("Start Discussion", on_click=complete_setup):
+        st.write("Setup complete. Starting discussion...")
 
 if st.session_state.setup_complete and not st.session_state.feedback_shown and not st.session_state.chat_complete:
 
     st.info(
         """"
-        Start by introduction yourself.
+        What's on your mind?
         """,
         icon = "👏"
     )
@@ -87,7 +87,7 @@ if st.session_state.setup_complete and not st.session_state.feedback_shown and n
     if "messages" not in st.session_state:
         st.session_state.messages = [{
             "role":"system", 
-            "content": f"You are an HR executive that interviews an interviewee called {st.session_state['name']} with experience {st.session_state['experience']} and skills {st.session_state['skills']}. You should interview them for the position {st.session_state['level']} {st.session_state['position']} at the company {st.session_state['company']}"}]
+            "content": f"You are a {st.session_state['tradition']} minister who thoughtfully and gently provides pastoral care to a person named {st.session_state['name']} who wants to discuss {st.session_state['issue']} Here is their spiritual biography: {st.session_state['short_spiritual_bio']} Please offer kind support and practical guidance. Please include guidance that aligns with their favorite authors: {st.session_state['favorite_authors']}. Please also emphasize unique teaching of the {st.session['tradition']} tradition"}]
 
     for message in st.session_state.messages:
         if message["role"] != "system":
