@@ -73,7 +73,7 @@ if not st.session_state.setup_complete:
 if st.session_state.setup_complete and not st.session_state.feedback_shown and not st.session_state.chat_complete:
 
     st.info(
-        """"
+        """
         What's on your mind?
         """,
         icon = "👏"
