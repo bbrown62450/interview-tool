@@ -53,7 +53,7 @@ if not st.session_state.setup_complete:
         st.session_state["tradition"] = st.radio(
             "Choose tradition",
             key="visibility",
-            options=[ "Confucian", "Christianity", "Islam", "Buddhism", "Judaism", "Indigenous", "Spiritual but not Religious", "Hindu", "Baha'i" "Shinto", "Sikh", "None"],
+            options=[ "Confucian", "Christianity", "Islam", "Buddhism", "Judaism", "Indigenous", "Spiritual but not Religious", "Hindu", "Baha'i", "Shinto", "Sikh", "None"],
         )
 
     with col2:
